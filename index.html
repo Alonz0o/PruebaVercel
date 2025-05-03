@@ -2,9 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Hola Mundo</title>
+    <title>Registro</title>
 </head>
 <body>
-    <h1>Hola mundo HOLA!"#!"#!"1123213123ArielAriel</h1>
+    <h1>Registro de Usuario</h1>
+    <form id="registroForm">
+        <label>Nombre:</label><br>
+        <input type="text" id="nombre" required><br><br>
+        <label>Email:</label><br>
+        <input type="email" id="email" required><br><br>
+        <label>Contraseña:</label><br>
+        <input type="password" id="password" required><br><br>
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const datos = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            const res = await fetch('/registro', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+
+            alert(await res.text());
+        });
+    </script>
 </body>
 </html>
